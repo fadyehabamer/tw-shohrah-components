@@ -1,5 +1,5 @@
 import { LitElement as O, css as L, html as a, svg as b, nothing as l } from "lit";
-import { property as w, state as p } from "lit/decorators.js";
+import { property as p, state as w } from "lit/decorators.js";
 import { classMap as A } from "lit/directives/class-map.js";
 function u() {
   return window.salla ?? window.Salla;
@@ -320,16 +320,16 @@ class m extends O {
   }
 }
 k([
-  w({ type: Object })
+  p({ type: Object })
 ], m.prototype, "config");
 k([
-  p()
+  w()
 ], m.prototype, "locale");
 k([
-  p()
+  p({ type: String, reflect: !0, attribute: "data-phase" })
 ], m.prototype, "phase");
 k([
-  p()
+  w()
 ], m.prototype, "errorMessage");
 const G = L`
   :host {
@@ -931,19 +931,19 @@ const st = ["marquee", "rotate", "static"], it = ["dot", "line", "icon", "none"]
 S.styles = [G, et];
 let d = S;
 f([
-  w({ type: String })
+  p({ type: String })
 ], d.prototype, "mode");
 f([
-  w({ type: Boolean, reflect: !0 })
+  p({ type: Boolean, reflect: !0 })
 ], d.prototype, "sticky");
 f([
-  w({ type: Boolean })
+  p({ type: Boolean })
 ], d.prototype, "paused");
 f([
-  p()
+  w()
 ], d.prototype, "dismissed");
 f([
-  p()
+  w()
 ], d.prototype, "active");
 typeof d < "u" && d.registerSallaComponent("salla-announcement-ticker");
 export {

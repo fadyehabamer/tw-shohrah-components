@@ -1,7 +1,7 @@
-# Shohrah Components — Build Plan (awaiting approval)
+# Shohrah Components — Build Plan
 
 Bundle: **Shohrah Components** (`tw-shohrah-components`, already created by Salla CLI in this repo).
-Status: plan only. No component code has been written. Nothing below is final until you approve or edit it.
+Status: **approved and built** (2026-09-05). The ten components below plus three added on request (`delivery-estimator`, `size-guide-drawer`, `before-after-slider`, modelled on the nyx-commerce-lib reference) are implemented; see README.md and docs/. Decisions taken from the open questions: Arabic editor labels (option A), FAQ JSON-LD off by default, GitHub repo as placeholder `support_url`.
 
 ---
 

@@ -14,6 +14,11 @@ export const styles = css`
     display: block;
     width: auto;
   }
+  :host([data-phase='empty']),
+  :host([data-phase='error']) {
+    position: static;
+    width: 100%;
+  }
   :host([position='start']) {
     inset-inline-end: auto;
     inset-inline-start: var(--wa-side);

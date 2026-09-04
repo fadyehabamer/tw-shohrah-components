@@ -1,7 +1,7 @@
 import { LitElement as z, css as C, svg as p, html as l, nothing as u } from "lit";
-import { property as S, state as m, query as L } from "lit/decorators.js";
+import { property as _, state as v, query as L } from "lit/decorators.js";
 import { classMap as R } from "lit/directives/class-map.js";
-function f() {
+function m() {
   return window.salla ?? window.Salla;
 }
 let w = null;
@@ -21,7 +21,7 @@ function T(a, t) {
 function D(a = 8e3) {
   return w || (w = new Promise((t) => {
     const e = Date.now(), r = () => {
-      const s = f();
+      const s = m();
       if (s && typeof s.onReady == "function") {
         T(Promise.resolve(s.onReady()), a).then(() => s.lang?.onLoaded ? T(s.lang.onLoaded(), 4e3) : void 0).then(() => t(s));
         return;
@@ -35,11 +35,11 @@ function D(a = 8e3) {
     r();
   }), w);
 }
-function $() {
+function S() {
   const a = document.documentElement.getAttribute("lang");
   let t = a && a.trim();
   if (!t) {
-    const e = f();
+    const e = m();
     try {
       t = e?.lang?.getLocale?.() || e?.config?.get("user.language_code");
     } catch {
@@ -49,7 +49,7 @@ function $() {
   return (t || "ar").toLowerCase().split(/[-_]/)[0];
 }
 function P() {
-  const a = f();
+  const a = m();
   if (!a) return {};
   try {
     return {
@@ -77,7 +77,7 @@ function I(a, t) {
   ) : a;
 }
 function O(a, t) {
-  const e = f();
+  const e = m();
   if (!e?.lang?.addBulk) return;
   const r = window.__shohrahI18n ?? (window.__shohrahI18n = /* @__PURE__ */ new Set());
   if (r.has(a)) return;
@@ -89,7 +89,7 @@ function O(a, t) {
   }
 }
 function V(a, t, e, r, s) {
-  const i = `shohrah.${a}.${t}`, o = f();
+  const i = `shohrah.${a}.${t}`, o = m();
   let c;
   if (o?.lang?.get && o.lang.translationsLoaded)
     try {
@@ -106,7 +106,7 @@ function V(a, t, e, r, s) {
 }
 function x(a) {
   if (a == null || a === "") return "";
-  const t = f();
+  const t = m();
   try {
     if (t?.helpers?.number) return String(t.helpers.number(a));
   } catch {
@@ -116,7 +116,7 @@ function x(a) {
 function k(a, t, e) {
   return Math.min(e, Math.max(t, a));
 }
-var W = Object.defineProperty, _ = (a, t, e, r) => {
+var W = Object.defineProperty, $ = (a, t, e, r) => {
   for (var s = void 0, i = a.length - 1, o; i >= 0; i--)
     (o = a[i]) && (s = o(t, e, s) || s);
   return s && W(t, e, s), s;
@@ -127,9 +127,9 @@ class b extends z {
   }
   /* ------------------------------------------------------------- lifecycle */
   connectedCallback() {
-    super.connectedCallback(), this.locale = $();
+    super.connectedCallback(), this.locale = S();
     const t = new MutationObserver(() => {
-      const e = $();
+      const e = S();
       e !== this.locale && (this.locale = e, this.onLocaleChange());
     });
     t.observe(document.documentElement, { attributes: !0, attributeFilter: ["lang", "dir"] }), this.addDisposer(() => t.disconnect()), this.booted ? this.onSallaReady() : (this.booted = !0, this.boot());
@@ -145,7 +145,7 @@ class b extends z {
   }
   async boot() {
     if (this.salla = await D(), !!this.isConnected) {
-      this.locale = $(), O(this.ns, this.messages), this.applyThemeFallbacks();
+      this.locale = S(), O(this.ns, this.messages), this.applyThemeFallbacks();
       try {
         await this.onSallaReady(), this.emit("ready");
       } catch (t) {
@@ -298,17 +298,17 @@ class b extends z {
     return 0.2126 * o(r) + 0.7152 * o(s) + 0.0722 * o(i) > 0.4 ? "#1c1c1c" : "#ffffff";
   }
 }
-_([
-  S({ type: Object })
+$([
+  _({ type: Object })
 ], b.prototype, "config");
-_([
-  m()
+$([
+  v()
 ], b.prototype, "locale");
-_([
-  m()
+$([
+  _({ type: String, reflect: !0, attribute: "data-phase" })
 ], b.prototype, "phase");
-_([
-  m()
+$([
+  v()
 ], b.prototype, "errorMessage");
 const N = C`
   :host {
@@ -767,7 +767,7 @@ const N = C`
     box-shadow: var(--sh-focus);
   }
 `;
-var U = Object.defineProperty, g = (a, t, e, r) => {
+var U = Object.defineProperty, f = (a, t, e, r) => {
   for (var s = void 0, i = a.length - 1, o; i >= 0; i--)
     (o = a[i]) && (s = o(t, e, s) || s);
   return s && U(t, e, s), s;
@@ -880,12 +880,12 @@ const Y = ["elevated", "outlined", "plain"], J = ["start", "center"], A = class 
 
         <div class="track" part="track" tabindex="0" aria-live=${this.stopAuto ? "off" : "polite"} @keydown=${this.onTrackKeydown}>
           ${t.map(
-      (d, v) => l`<div
+      (d, g) => l`<div
               class="slide"
               part="slide"
               role="group"
               aria-roledescription="slide"
-              aria-label=${this.t("slide_of", { n: x(v + 1), total: x(t.length) })}
+              aria-label=${this.t("slide_of", { n: x(g + 1), total: x(t.length) })}
             >
               <article class=${R({ card: !0, [`card--${e}`]: !0, "card--center": r === "center" })} part="card">
                 ${n ? l`<span class="quote-icon" aria-hidden="true">${Q()}</span>` : u}
@@ -904,13 +904,13 @@ const Y = ["elevated", "outlined", "plain"], J = ["start", "center"], A = class 
         </div>
 
         ${i ? l`<ul class="dots" part="dots" role="list">
-              ${Array.from({ length: this.pages }, (d, v) => l`<li>
+              ${Array.from({ length: this.pages }, (d, g) => l`<li>
                 <button
                   class="dot"
                   type="button"
-                  aria-label=${this.t("go_to", { n: x(v + 1) })}
-                  aria-current=${String(v === this.index)}
-                  @click=${() => this.goTo(v)}
+                  aria-label=${this.t("go_to", { n: x(g + 1) })}
+                  aria-current=${String(g === this.index)}
+                  @click=${() => this.goTo(g)}
                 ></button>
               </li>`)}
             </ul>` : u}
@@ -930,22 +930,22 @@ const Y = ["elevated", "outlined", "plain"], J = ["start", "center"], A = class 
 };
 A.styles = [N, K];
 let h = A;
-g([
-  S({ type: Boolean })
+f([
+  _({ type: Boolean })
 ], h.prototype, "autoplay");
-g([
-  S({ type: String, attribute: "card-style" })
+f([
+  _({ type: String, attribute: "card-style" })
 ], h.prototype, "cardStyle");
-g([
-  m()
+f([
+  v()
 ], h.prototype, "index");
-g([
-  m()
+f([
+  v()
 ], h.prototype, "pages");
-g([
-  m()
+f([
+  v()
 ], h.prototype, "hovering");
-g([
+f([
   L(".track")
 ], h.prototype, "trackEl");
 typeof h < "u" && h.registerSallaComponent("salla-testimonials-slider");

@@ -25,7 +25,8 @@ export abstract class ShohrahElement extends LitElement {
   @property({ type: Object }) config: Record<string, unknown> | undefined;
 
   @state() protected locale = 'ar';
-  @state() protected phase: Phase = 'loading';
+  /** Reflected as `data-phase` so themes can style loading/empty/error states from outside. */
+  @property({ type: String, reflect: true, attribute: 'data-phase' }) phase: Phase = 'loading';
   @state() protected errorMessage = '';
 
   protected salla: SallaLike | undefined;

@@ -44,7 +44,6 @@ export default class FreeShippingMeter extends ShohrahElement {
       this.apply(undefined);
       this.salla?.log?.('[shohrah:free-shipping-meter] cart unavailable', err);
     }
-    this.phase = 'ready';
   }
 
   private apply(cart: SallaCartSummary | undefined): void {
@@ -62,6 +61,7 @@ export default class FreeShippingMeter extends ShohrahElement {
     const remaining = Math.max(0, threshold - subtotal);
     const percent = reached ? 100 : clamp(Math.round((subtotal / threshold) * 100), 0, 100);
     this.meter = { subtotal, threshold, remaining, percent, reached, count };
+    this.phase = 'ready';
     this.emit('cart-progress', { subtotal, threshold, percent });
     if (reached && !this.wasReached) {
       this.emit('free-shipping-reached');

@@ -1,11 +1,11 @@
-import { LitElement as D, css as T, html as c, svg as l, nothing as g } from "lit";
-import { property as m, state as $ } from "lit/decorators.js";
+import { LitElement as D, css as C, html as c, svg as l, nothing as g } from "lit";
+import { property as u, state as T } from "lit/decorators.js";
 import { classMap as E } from "lit/directives/class-map.js";
-function u() {
+function m() {
   return window.salla ?? window.Salla;
 }
 let b = null;
-function M(i, t) {
+function _(i, t) {
   return new Promise((r) => {
     const s = window.setTimeout(() => r(void 0), t);
     i.then(
@@ -21,9 +21,9 @@ function M(i, t) {
 function O(i = 8e3) {
   return b || (b = new Promise((t) => {
     const r = Date.now(), s = () => {
-      const e = u();
+      const e = m();
       if (e && typeof e.onReady == "function") {
-        M(Promise.resolve(e.onReady()), i).then(() => e.lang?.onLoaded ? M(e.lang.onLoaded(), 4e3) : void 0).then(() => t(e));
+        _(Promise.resolve(e.onReady()), i).then(() => e.lang?.onLoaded ? _(e.lang.onLoaded(), 4e3) : void 0).then(() => t(e));
         return;
       }
       if (Date.now() - r > i) {
@@ -39,7 +39,7 @@ function k() {
   const i = document.documentElement.getAttribute("lang");
   let t = i && i.trim();
   if (!t) {
-    const r = u();
+    const r = m();
     try {
       t = r?.lang?.getLocale?.() || r?.config?.get("user.language_code");
     } catch {
@@ -49,7 +49,7 @@ function k() {
   return (t || "ar").toLowerCase().split(/[-_]/)[0];
 }
 function N(i) {
-  const t = u();
+  const t = m();
   try {
     if (t?.url?.cdn) return t.url.cdn(i);
   } catch {
@@ -57,7 +57,7 @@ function N(i) {
   return `https://cdn.salla.network/${i.replace(/^\/+/, "")}`;
 }
 function R() {
-  const i = u();
+  const i = m();
   if (!i) return {};
   try {
     return {
@@ -69,7 +69,7 @@ function R() {
     return {};
   }
 }
-function z(i, t) {
+function M(i, t) {
   if (i == null) return "";
   if (typeof i == "string") return i;
   if (typeof i == "number") return String(i);
@@ -85,7 +85,7 @@ function V(i, t) {
   ) : i;
 }
 function B(i, t) {
-  const r = u();
+  const r = m();
   if (!r?.lang?.addBulk) return;
   const s = window.__shohrahI18n ?? (window.__shohrahI18n = /* @__PURE__ */ new Set());
   if (s.has(i)) return;
@@ -97,7 +97,7 @@ function B(i, t) {
   }
 }
 function W(i, t, r, s, e) {
-  const o = `shohrah.${i}.${t}`, n = u();
+  const o = `shohrah.${i}.${t}`, n = m();
   let h;
   if (n?.lang?.get && n.lang.translationsLoaded)
     try {
@@ -215,7 +215,7 @@ class f extends D {
     const s = this.raw(t);
     if (s == null) return r;
     if (typeof s == "object") {
-      const o = z(s, this.locale);
+      const o = M(s, this.locale);
       return o.trim() ? o : r;
     }
     const e = String(s);
@@ -257,7 +257,7 @@ class f extends D {
     const e = t[r];
     if (e == null) return s;
     if (typeof e == "object") {
-      const n = z(e, this.locale);
+      const n = M(e, this.locale);
       return n.trim() ? n : s;
     }
     const o = String(e);
@@ -298,18 +298,18 @@ class f extends D {
   }
 }
 y([
-  m({ type: Object })
+  u({ type: Object })
 ], f.prototype, "config");
 y([
-  $()
+  T()
 ], f.prototype, "locale");
 y([
-  $()
+  u({ type: String, reflect: !0, attribute: "data-phase" })
 ], f.prototype, "phase");
 y([
-  $()
+  T()
 ], f.prototype, "errorMessage");
-const X = T`
+const X = C`
   :host {
     --sh-primary: var(--color-primary, var(--shohrah-primary, #1f5c5a));
     --sh-primary-dark: var(--color-primary-dark, var(--shohrah-primary-dark, #174846));
@@ -583,7 +583,7 @@ const et = {
   default_3_text: { ar: "استرجاع أو استبدال خلال ١٤ يومًا دون تعقيد", en: "Return or exchange within 14 days, no hassle" },
   default_4_title: { ar: "دعم على مدار الساعة", en: "24/7 support" },
   default_4_text: { ar: "فريقنا جاهز للرد عبر الواتساب والبريد في أي وقت", en: "Our team answers on WhatsApp and email any time" }
-}, st = T`
+}, st = C`
   .root {
     --tb-cols: 4;
     --tb-cols-mobile: 2;
@@ -738,7 +738,7 @@ var it = Object.defineProperty, v = (i, t, r, s) => {
     (n = i[o]) && (e = n(t, r, e) || e);
   return e && it(t, r, e), e;
 };
-const ot = ["row", "grid", "compact"], nt = ["outline", "circle", "filled"], at = ["start", "center"], ct = ["transparent", "surface", "tint"], lt = ["sm", "md"], C = [Y, H, q, Z, J, Q, K, G], S = class S extends f {
+const ot = ["row", "grid", "compact"], nt = ["outline", "circle", "filled"], at = ["start", "center"], ct = ["transparent", "surface", "tint"], lt = ["sm", "md"], z = [Y, H, q, Z, J, Q, K, G], S = class S extends f {
   constructor() {
     super(...arguments), this.ns = "trust-badges", this.messages = et;
   }
@@ -763,7 +763,7 @@ const ot = ["row", "grid", "compact"], nt = ["outline", "circle", "filled"], at 
     this.emit("badge-click", { index: t, title: r.title, href: r.href });
   }
   render() {
-    const t = this.layout ?? this.choice("layout", ot, "row"), r = this.align ?? this.choice("align", at, "center"), s = this.iconStyle ?? this.choice("icon_style", nt, "circle"), e = this.background ?? this.choice("background", ct, "transparent"), o = this.choice("text_size", lt, "md"), n = this.bool("dividers", !0), h = this.bool("show_title", !1), a = this.num("columns_desktop", 4, 2, 6), _ = this.num("columns_mobile", 2, 1, 2), A = this.num("icon_size", 28, 20, 48), x = this.items, L = x.some((w) => w.icon.startsWith("sicon-"));
+    const t = this.layout ?? this.choice("layout", ot, "row"), r = this.align ?? this.choice("align", at, "center"), s = this.iconStyle ?? this.choice("icon_style", nt, "circle"), e = this.background ?? this.choice("background", ct, "transparent"), o = this.choice("text_size", lt, "md"), n = this.bool("dividers", !0), h = this.bool("show_title", !1), a = this.num("columns_desktop", 4, 2, 6), $ = this.num("columns_mobile", 2, 1, 2), A = this.num("icon_size", 28, 20, 48), x = this.items, L = x.some((w) => w.icon.startsWith("sicon-"));
     if (this.phase === "error")
       return c`<div class="sh-error" role="alert">${this.errorMessage}</div>`;
     if (x.length === 0)
@@ -775,8 +775,8 @@ const ot = ["row", "grid", "compact"], nt = ["outline", "circle", "filled"], at 
       [`root--${o}`]: !0,
       "root--center": r === "center",
       "root--dividers": n && t !== "compact",
-      "root--m1": _ === 1
-    }, I = `--tb-cols:${a};--tb-cols-mobile:${_};--tb-icon:${A}px`;
+      "root--m1": $ === 1
+    }, I = `--tb-cols:${a};--tb-cols-mobile:${$};--tb-icon:${A}px`;
     return c`
       ${L ? tt() : g}
       <section class=${E(j)} style=${I} part="root" aria-label=${this.t("region_label")}>
@@ -790,7 +790,7 @@ const ot = ["row", "grid", "compact"], nt = ["outline", "circle", "filled"], at 
     `;
   }
   renderItem(t, r, s) {
-    const e = C[r % C.length], o = c`
+    const e = z[r % z.length], o = c`
       <span class="icon icon--${s}" part="icon">${rt(t.icon, e)}</span>
       <span class="body">
         ${t.title ? c`<p class="title" part="badge-title">${t.title}</p>` : g}
@@ -805,16 +805,16 @@ const ot = ["row", "grid", "compact"], nt = ["outline", "circle", "filled"], at 
 S.styles = [X, st];
 let d = S;
 v([
-  m({ type: String })
+  u({ type: String })
 ], d.prototype, "layout");
 v([
-  m({ type: String })
+  u({ type: String })
 ], d.prototype, "align");
 v([
-  m({ type: String, attribute: "icon-style" })
+  u({ type: String, attribute: "icon-style" })
 ], d.prototype, "iconStyle");
 v([
-  m({ type: String })
+  u({ type: String })
 ], d.prototype, "background");
 typeof d < "u" && d.registerSallaComponent("salla-trust-badges");
 export {

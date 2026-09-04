@@ -1,5 +1,5 @@
 import { LitElement as j, css as E, svg as d, html as l, nothing as p } from "lit";
-import { property as w, state as f } from "lit/decorators.js";
+import { property as f, state as w } from "lit/decorators.js";
 import { classMap as L } from "lit/directives/class-map.js";
 function u() {
   return window.salla ?? window.Salla;
@@ -299,16 +299,16 @@ class g extends j {
   }
 }
 x([
-  w({ type: Object })
+  f({ type: Object })
 ], g.prototype, "config");
 x([
-  f()
+  w()
 ], g.prototype, "locale");
 x([
-  f()
+  f({ type: String, reflect: !0, attribute: "data-phase" })
 ], g.prototype, "phase");
 x([
-  f()
+  w()
 ], g.prototype, "errorMessage");
 const W = E`
   :host {
@@ -911,19 +911,19 @@ const k = class k extends g {
 k.styles = [W, Q];
 let c = k;
 b([
-  w({ type: Boolean, attribute: "allow-multiple" })
+  f({ type: Boolean, attribute: "allow-multiple" })
 ], c.prototype, "allowMultiple");
 b([
-  w({ type: String })
+  f({ type: String })
 ], c.prototype, "layout");
 b([
-  w({ type: String, attribute: "icon-style" })
+  f({ type: String, attribute: "icon-style" })
 ], c.prototype, "iconStyle");
 b([
-  f()
+  w()
 ], c.prototype, "open");
 b([
-  f()
+  w()
 ], c.prototype, "query");
 typeof c < "u" && c.registerSallaComponent("salla-faq-accordion");
 export {
