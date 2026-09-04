@@ -1,15 +1,20 @@
 {
     "name": "tw-shohrah-components",
     "version": "1.0.0",
-    "description": "",
+    "description": "Shohrah Components — conversion-booster component bundle for Salla Twilight themes",
     "type": "module",
     "scripts": {
         "dev": "vite",
         "build": "vite build",
-        "preview": "vite preview"
+        "preview": "vite preview",
+        "typecheck": "tsc --noEmit",
+        "tw-create-component": "tw-create-component",
+        "tw-delete-component": "tw-delete-component"
     },
     "devDependencies": {
         "@salla.sa/twilight-bundles": "^0.1.0",
+        "@types/node": "^22.20.1",
+        "typescript": "^5.9.3",
         "vite": "^5.0.0"
     },
     "author": "fadyamer45@gmail.com",
@@ -17,5 +22,8 @@
         "type": "git",
         "url": "https://github.com/fadyehabamer/tw-shohrah-components"
     },
-    "private": true
+    "private": true,
+    "dependencies": {
+        "lit": "^3.3.3"
+    }
 }
