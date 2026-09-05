@@ -106,3 +106,17 @@ Global checks for every component: no horizontal scroll at 360 px; text never ov
 3. Touch at 360 px: horizontal drag moves the handle, vertical swipe still scrolls the page.
 4. `ratio = square` and `portrait` keep the frame stable while images load.
 5. `hover_move` on → the split follows the mouse without dragging.
+
+## volume-discount-ladder
+1. Default shows three tiers with the last one highlighted (empty cart in the demo).
+2. On a real store add 2 of a product and open its page → tier 1 marked reached, progress line says "add 1 more to get 15% off" and shows "2 in cart"; `shohrah:tier-change` fires.
+3. Reach the top tier → progress line switches to the reached message.
+4. `style = cards` renders equal cards; `steps` renders a connected ladder with numbered dots.
+5. Turn `track_cart` off → no cart request, `highlight` decides the emphasised tier.
+
+## coupon-code-card
+1. Click the code or **Copy** → clipboard holds the code, button and code turn green for 2 s, `shohrah:coupon-copied` fires.
+2. **Apply to cart** with items in the cart → spinner, then "Code applied" and the cart total updates; with an empty cart or an invalid code the SDK error text shows under the buttons and `shohrah:coupon-failed` fires.
+3. `action = copy` hides the apply button; `apply` hides copy (the code itself no longer copies).
+4. Enable `show_expiry` with a date within 14 days → "Expires … · N days left"; a past date with `expired_behavior = message` shows the expired text, with `hide` the card disappears.
+5. `style = inline` collapses to a single row; `ticket` shows the notched edges in both directions.

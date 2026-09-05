@@ -2,7 +2,7 @@
 
 Generated from `twilight-bundle.json` by `scripts/gen-field-reference.mjs` — do not edit by hand.
 
-Bundle: **Shohrah Components** / **عناصر شهرة** — 13 components.
+Bundle: **Shohrah Components** / **عناصر شهرة** — 15 components.
 
 ## `offer-countdown` — عدّاد العرض
 
@@ -378,4 +378,66 @@ Tag: `<salla-before-after-slider>` · key: `8ec915aa-7574-4f7b-8657-089cb4484377
 **Translation keys** (registered as `shohrah.before-after-slider.<key>`, override with `salla.lang.set()`):
 
 `title`, `subtitle`, `before`, `after`, `hint`, `slider_label`, `value_text`, `missing_images`
+
+## `volume-discount-ladder` — سلّم خصومات الكمية
+
+Tag: `<salla-volume-discount-ladder>` · key: `a390c6c2-6978-4ed4-85bc-357065b075d4` · icon: `sicon-layers` · 16 editable fields
+
+| id | type | label (editor) | default |
+|---|---|---|---|
+| `title` | string/text · multilanguage | العنوان | ar: “اشترِ أكثر، وفّر أكثر” · en: “Buy more, save more” |
+| `subtitle` | string/text · multilanguage | العنوان الفرعي | ar: “خصومات تلقائية كلما زادت الكمية في سلتك” · en: “Automatic discounts as your quantity grows” |
+| `tiers` | collection/collection | الفئات | 3 rows |
+| ↳ `tiers[].min_qty` | number/integer | الحد الأدنى للكمية | `2` |
+| ↳ `tiers[].qty_label` | string/text · multilanguage | نص الكمية | — |
+| ↳ `tiers[].discount_label` | string/text · multilanguage | نص الخصم | — |
+| ↳ `tiers[].note` | string/text · multilanguage | وصف اختياري | — |
+| `track_cart` | boolean/switch | إبراز الفئة المحققة حسب السلة | `true` |
+| `progress_text` | string/text · multilanguage | نص التقدّم للفئة التالية | ar: “أضف {n} للحصول على {discount}” · en: “Add {n} more to get {discount}” |
+| `reached_text` | string/text · multilanguage | نص الوصول لأعلى فئة | ar: “وصلت لأعلى خصم متاح 🎉” · en: “You’ve unlocked the top discount 🎉” |
+| `style` | items/radio-list | الشكل | `list` |
+| `highlight` | items/radio-list | إبراز افتراضي (عندما لا تكون السلة مرتبطة) | `last` |
+| `align` | items/radio-list | محاذاة العنوان | `start` |
+| `use_theme_color` | boolean/switch | استخدام لون الثيم الأساسي | `true` |
+| `accent_color` | string/color | لون مخصص | `#1F5C5A` |
+| `show_note` | boolean/switch | إظهار ملاحظة أسفل القائمة | `true` |
+| `note` | string/text · multilanguage | الملاحظة | ar: “تُطبّق الخصومات تلقائيًا في السلة عند بلوغ الكمية” · en: “Discounts apply automatically in the cart once the quantity is reached” |
+| `show_cta` | boolean/switch | إظهار زر | `false` |
+| `cta_text` | string/text · multilanguage | نص الزر | ar: “تسوّق الآن” · en: “Shop now” |
+| `cta_link` | items/variable-list · source: custom | رابط الزر | — (source: custom) |
+
+**Translation keys** (registered as `shohrah.volume-discount-ladder.<key>`, override with `salla.lang.set()`):
+
+`title`, `subtitle`, `region_label`, `progress`, `reached`, `current`, `in_cart`, `note`, `cta`, `empty`, `default_1_qty`, `default_1_disc`, `default_1_note`, `default_2_qty`, `default_2_disc`, `default_2_note`, `default_3_qty`, `default_3_disc`, `default_3_note`
+
+## `coupon-code-card` — بطاقة كود الخصم
+
+Tag: `<salla-coupon-code-card>` · key: `1beba5b3-605d-48a9-8475-dc159d6d9262` · icon: `sicon-discount` · 20 editable fields
+
+| id | type | label (editor) | default |
+|---|---|---|---|
+| `code` | string/text | كود الخصم | `WELCOME10` |
+| `title` | string/text · multilanguage | العنوان | ar: “خصم ١٠٪ على طلبك الأول” · en: “10% off your first order” |
+| `description` | string/text · multilanguage | الوصف | ar: “انسخ الكود واستخدمه عند الدفع” · en: “Copy the code and use it at checkout” |
+| `conditions` | string/text · multilanguage | الشروط (اختياري) | ar: “للطلبات فوق ١٥٠ ر.س · لا يُجمع مع عروض أخرى” · en: “Orders over 150 SAR · cannot be combined with other offers” |
+| `action` | items/radio-list | ما يحدث عند الضغط | `both` |
+| `copy_text` | string/text · multilanguage | نص زر النسخ | ar: “نسخ” · en: “Copy” |
+| `copied_text` | string/text · multilanguage | نص بعد النسخ | ar: “تم النسخ” · en: “Copied” |
+| `apply_text` | string/text · multilanguage | نص زر التطبيق | ar: “تطبيق على السلة” · en: “Apply to cart” |
+| `applied_text` | string/text · multilanguage | نص بعد التطبيق | ar: “تم تطبيق الكود” · en: “Code applied” |
+| `show_expiry` | boolean/switch | إظهار تاريخ الانتهاء | `false` |
+| `expires_at` | string/datetime | ينتهي في | `2026-12-31T23:59:00` |
+| `expired_behavior` | items/radio-list | بعد الانتهاء | `hide` |
+| `expired_text` | string/text · multilanguage | رسالة الانتهاء | ar: “انتهت صلاحية هذا الكود” · en: “This code has expired” |
+| `style` | items/radio-list | الشكل | `ticket` |
+| `dashed` | boolean/switch | حدود متقطّعة حول الكود | `true` |
+| `show_icon` | boolean/switch | إظهار أيقونة | `true` |
+| `icon` | string/icon | الأيقونة | — |
+| `use_theme_color` | boolean/switch | استخدام لون الثيم الأساسي | `true` |
+| `accent_color` | string/color | لون مخصص | `#1F5C5A` |
+| `max_width` | number/units | أقصى عرض | `480` |
+
+**Translation keys** (registered as `shohrah.coupon-code-card.<key>`, override with `salla.lang.set()`):
+
+`title`, `description`, `copy`, `copied`, `apply`, `applying`, `applied`, `apply_failed`, `code_label`, `copy_aria`, `expires`, `expires_in`, `expired`, `missing_code`
 

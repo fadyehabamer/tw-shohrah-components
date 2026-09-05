@@ -1,6 +1,6 @@
 # Shohrah Components — عناصر شهرة
 
-A Salla Twilight **theme component bundle** of 13 conversion-booster components. Every component is a standalone Lit web component that any Twilight theme can drop in, fully configurable from the theme editor, Arabic-first with English mirrored, and styled from the host theme's design tokens.
+A Salla Twilight **theme component bundle** of 15 conversion-booster components. Every component is a standalone Lit web component that any Twilight theme can drop in, fully configurable from the theme editor, Arabic-first with English mirrored, and styled from the host theme's design tokens.
 
 | # | Component | Tag | What it does |
 |---|---|---|---|
@@ -17,6 +17,8 @@ A Salla Twilight **theme component bundle** of 13 conversion-booster components.
 | 11 | Delivery estimator | `<salla-delivery-estimator>` | Order-by cutoff countdown and arrival window per city, zero requests |
 | 12 | Size guide drawer | `<salla-size-guide-drawer>` | Side drawer with size table, cm/in toggle and measuring tips |
 | 13 | Before / after slider | `<salla-before-after-slider>` | Draggable, keyboard-accessible image comparison |
+| 14 | Volume discount ladder | `<salla-volume-discount-ladder>` | "Buy more, save more" tiers that track the visitor's cart |
+| 15 | Coupon code card | `<salla-coupon-code-card>` | Click-to-copy promo code with one-tap apply to the cart |
 
 Full per-field documentation (ids, types, editor labels, defaults, translation keys) is generated into [docs/FIELD-REFERENCE.md](docs/FIELD-REFERENCE.md). Manual test scripts and the viewport/browser matrix are in [docs/TESTING.md](docs/TESTING.md). The approved build plan is [PLAN.md](PLAN.md).
 
@@ -67,7 +69,7 @@ Before publishing: run `pnpm run build`, replace the placeholder `image` URLs in
 ## Architecture
 
 ```
-twilight-bundle.json          manifest: bundle info + 13 components with their editable fields
+twilight-bundle.json          manifest: bundle info + 15 components with their editable fields
 vite.config.ts                Salla transform/build/demo plugins + a resolver that inlines src/shared into each component
 src/
   types/salla.d.ts            narrow typing of the Twilight SDK surface used
@@ -112,7 +114,7 @@ Themes can retune any component by setting `--shohrah-*` on an ancestor or by st
 
 ### Data and performance
 
-- Only Twilight SDK calls: `product.api.getDetails`, `product.api.fetch({source:'selected'})`, `cart.api.latest`, `cart.addItem`, `cart::updated`, `salla.config`, `salla.storage`, `salla.lang`, `salla.money`. No raw fetches, no third-party requests. The WhatsApp button is a link the visitor clicks, not a request made by the component.
+- Only Twilight SDK calls: `product.api.getDetails`, `product.api.fetch({source:'selected'})`, `cart.api.latest`, `cart.addItem`, `cart.addCoupon`, `cart::updated`, `salla.config`, `salla.storage`, `salla.lang`, `salla.money`. No raw fetches, no third-party requests. The WhatsApp button is a link the visitor clicks, not a request made by the component.
 - At most one SDK request per component instance; product details are cached for 5 minutes in session storage; cart-driven components subscribe to events instead of polling.
 - `lit` is external (provided by Twilight). Built sizes per component: 25–32 KB minified, 8.4–10 KB gzipped.
 - Every component removes its listeners, timers and observers on disconnect.
@@ -165,6 +167,12 @@ Properties `config`, `open` (reflected), `unit` (`cm|in`). Events `shohrah:size-
 
 ### `before-after-slider`
 Properties `config`, `position` (0–100), `beforeSrc`, `afterSrc`. Event `shohrah:compare-change` ({ position }). Slots `title`, `subtitle`, `hint`. Parts `root`, `title`, `subtitle`, `stage`, `before`, `after`, `handle`, `label-before`, `label-after`, `hint`. With only an "after" image the "before" side shows it desaturated.
+
+### `volume-discount-ladder`
+Properties `config`, `quantity` (override the tracked quantity). Events `shohrah:tier-change` ({ quantity, reachedIndex, nextIndex }), `shohrah:cta-click` ({ href }). Slots `title`, `subtitle`, `note`, `cta`. Parts `root`, `title`, `subtitle`, `tier`, `pill`, `progress`, `note`, `cta`. With `track_cart` on it reads the cart once and follows `cart::updated`; on product pages it counts this product's quantity, elsewhere the total item count.
+
+### `coupon-code-card`
+Properties `config`, `code`. Events `shohrah:coupon-copied` ({ code }), `shohrah:coupon-applied` ({ code }), `shohrah:coupon-failed` ({ code, message }). Slots `title`, `description`, `conditions`. Parts `root`, `icon`, `title`, `description`, `code`, `copy`, `apply`, `conditions`, `expiry`. Copy uses the Clipboard API with a legacy fallback; apply calls `salla.cart.addCoupon` and shows the SDK's error message when the cart rejects the code.
 
 ---
 

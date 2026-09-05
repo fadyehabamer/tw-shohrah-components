@@ -54,12 +54,19 @@ export interface SallaFreeShippingBar {
   remaining: number;
 }
 
+export interface SallaCartItem {
+  id: number;
+  product_id: number;
+  quantity: number;
+}
+
 export interface SallaCartSummary {
   id?: number;
   sub_total?: number;
   total?: number;
   count?: number;
   free_shipping_bar?: SallaFreeShippingBar;
+  items?: SallaCartItem[];
 }
 
 export interface SallaApiResponse<T> {
@@ -104,6 +111,7 @@ export interface SallaLike {
     api: { latest: () => Promise<SallaApiResponse<{ cart?: SallaCartSummary } | SallaCartSummary>> };
     event: { onUpdated: (cb: (cart: SallaCartSummary) => void) => void };
     addItem: (data: { id: number; quantity: number; options?: unknown; notes?: string }) => Promise<unknown>;
+    addCoupon: (coupon: string) => Promise<unknown>;
   };
   event: {
     on: (event: string, cb: (...args: any[]) => void) => unknown;
